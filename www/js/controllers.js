@@ -3,6 +3,7 @@
 /* Controllers */
 function HomeCtrl($scope,navSvc,$rootScope) {
     $rootScope.showSettings = false;
+    //$rootScope.navSvc = navSvc;
     $scope.slidePage = function (path,type) {
         navSvc.slidePage(path,type);
     };
@@ -63,7 +64,7 @@ function CompassCtrl($scope) {
     },function(e) { console.log("Error finding compass " + e.code) });
 }
 
-function HackerNewsCtrl($scope, $rootScope) {
+function HackerNewsCtrl($scope, navSvc, $rootScope) {
 
     // load in data from hacker news unless we already have
     if (!$rootScope.items) {     
@@ -79,10 +80,19 @@ function HackerNewsCtrl($scope, $rootScope) {
     }
 
     $scope.loadItem = function(item) {
-        navigator.notification.alert(item.url,function() {console.log("Alert success")},"My Alert","Close");
+        
+        $rootScope.iframe = item;
+
+        //console.log($rootScope.navSvc.slidePage('/view9','modal'));
+
+        //navigator.notification.alert(item.url,function() {console.log("Alert success")},"My Alert","Close");
     };
+
 }
 
+function IframeCtrl($scope, navSrc, $rootScope) {
+
+}
 
 function ContactsCtrl($scope) {
     $scope.find = function() {
